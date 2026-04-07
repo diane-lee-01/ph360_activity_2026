@@ -1,0 +1,96 @@
+first_name,last_name,sex,street_1,street_2,zip_code,birth_date,ssn,phone,email,UUID
+Wei,Chen,M,711 Elm St,,96690,1996-05-25,,710-764-7009,wchen1996@company.org,9beb6f14-d396-4da4-93c5-feb4a69bc7d8
+Li,Wei,F,3416 Elm St,,24754,1956-01-08,,757-275-8623,,65782bd1-3c1e-4e30-8ef8-bccab4954bc1
+Jing,Wang,M,374 Walnut Ave,Apt 1,72330,1961-09-21,,288-851-3369,wang_jing@mail.com,1c560bb0-656e-4118-8cdf-740ffcf7ea74
+Min,Liu,F,6268 Cedar Ct,,52994,1964-12-27,,466-711-1038,sports120@hotmail.com,d319ec85-b6e2-433d-be7d-d156c84a8ce2
+Rahul,Sharma,M,4029 Pine Ln,,54949,1985-03-05,,779-705-2793,doc202@university.edu,3993dd4e-d9f1-47f7-828a-957404b06d9e
+Priya,Patel,F,9197 Maple St,,90921,1988-06-25,,539-656-5137,sun259@company.org,c9b24da2-842d-4bf0-b065-10ce1bae3bb6
+Amit,Singh,M,7898 Birch Blvd,Apt 20,48475,1973-12-16,,288-311-2588,red264@university.edu,5288e697-39eb-43d8-b490-36872ed2db6b
+Neha,Gupta,F,6072 Birch Blvd,,51284,1956-02-23,,297-746-1177,ngupta1956@company.org,6e3c79a2-7f29-4f15-8be7-dd822a122859
+Carlos,Garcia,M,7507 Birch Blvd,,36587,1997-05-28,,486-954-7533,sun429@university.edu,496ecdae-4ccb-4dce-9f7c-388c0deb11c5
+Sofia,Martinez,F,,Apt 3,87136,1985-10-24,,695-440-4471,sofiahappy@company.org,c0e2cbf4-97c2-485f-9d77-636e03948d54
+Mateo,Lopez,M,5782 Maple St,,95697,1972-07-19,,749-717-3726,mateo.lopez@gmail.com,bc38e5c7-6114-40f4-bc0f-70697147dc1f
+Valentina,Rodriguez,F,7714 Elm St,,47939,1965-09-11,,862-968-2141,valentina.rodriguez@university.edu,2aa58924-bcf7-4502-94b2-6cbf395cdea4
+Omar,Al-Fayed,M,5371 Pine Ln,Apt 6,75975,1963-05-06,,595-908-9737,oal-fayed1963@icloud.com,37fdec04-a141-4a3d-8dfc-87332041bb87
+Faitma,Hassan,F,6052 Elm St,,81769,1954-04-11,,446-450-9214,fatimasports@mail.com,b1098050-e7fc-433b-af23-ebf980f8ab6b
+Tariq,Mahmoud,M,5780 Oak Dr,,68204,1986-07-18,,723-645-2890,mahmoud_tariq@university.edu,310dc4a3-3009-46d4-af3d-d15680d04e4a
+Aisha,Rahman,F,4754 Cedar Ct,,71818,1973-07-01,,966-435-6600,rahman_aisha@university.edu,29e349f7-8bfa-42eb-959a-716f1578c5ad
+Yuki,Tnaaka,M,6548 Oak Dr,,88307,1959-08-08,,317-679-2674,ytanaka1959@icloud.com,172cb81d-7143-47ca-9ab4-3e6216afe4ed
+Kenji,Sato,F,4442 Oak Dr,,92679,1963-11-04,,775-274-3405,tech690@mail.com,5734f49f-0db7-4cfa-ab58-28f3ab7eaf3c
+Ji-Hoon,Kim,M,2372 Elm St,,50269,1966-04-19,,896-261-7881,star242@outlook.com,de5cab75-3c37-425a-9924-e217d8f27b51
+Min-Ji,Park,F,6950 Cedar Ct,Apt 10,53216,1984-12-23,,436-499-8300,park_min-ji@icloud.com,728979b5-9e42-4cfb-b829-be392110d0b6
+James,Smith,M,1943 Pine Ln,,42287,1970-12-01,,696-623-9290,jsmith1970@icloud.com,455f692d-264d-4998-b55c-8831ccce9ecb
+Mary,Johnson,F,2770 Elm St,,91086,1997-11-08,,864-274-2570,mjohnson1997@mail.com,cfd17f34-7409-4a81-8abf-66b087aad0da
+Robert,Williams,M,6178 Oak Dr,Apt 2,80132,1978-11-23,,581-731-4338,,8034a6ab-14e7-427a-b5dc-b0dcfc23c0bb
+Patricia,Brrown,F,3026 Oak Dr,,39853,1976-07-16,,849-947-8556,patriciasports@university.edu,0e1a6ba6-c2c0-4dca-b6ea-4346ebff86f3
+Micheal,Jones,M,2257 Maple St,,15419,1962-11-26,,986-613-6725,micheal.jones@gmail.com,f18068a8-92eb-49af-9d7a-e7d53c398dae
+Linda,Miller,F,2494 Cedar Ct,,40315,1964-08-06,,581-533-6622,lindahappy@hotmail.com,e29ce803-895e-46f1-bd3a-2e2092cc2c8b
+William,Davis,M,3977 Birch Blvd,,93735,1975-02-23,,388-645-1644,data128@outlook.com,3aeb3ea3-0a8a-4af0-a84c-c147bfbbb08a
+Elizabeth,Wilson,F,5162 Walnut Ave,Apt 13,83976,1977-01-28,,442-913-7429,elizabethsun@gmail.com,c0c5dc42-21bc-4962-9809-3d913d3fcdab
+David,Taylor,M,2193 Walnut Ave,Apt 16,31539,1992-07-11,,949-826-1727,taylor_david@mail.com,362bdfd9-6b03-4682-a3d1-ce26f9a134fc
+Jennifer,Anderson,F,4651 Cedar Ct,,45838,1951-02-23,387-89-6588,682-824-1378,janderson1951@gmail.com,ab879048-f33e-4bdc-bef5-f05a5a2b9e09
+Richard,Thomas,M,452 Elm St,,92918,1981-02-11,,615-892-4623,rthomas1981@company.org,e9a3ae3e-d134-498d-b4ab-c710a8909728
+Maria,Jackson,F,5228 Walnut Ave,,72008,1993-06-15,,941-561-4675,mjackson1993@company.org,dd1b80db-7fc5-484d-815e-ed30d7d68ff8
+Joseph,White,M,7408 Pine Ln,,87207,1990-04-22,,718-944-7846,josephblue@outlook.com,ba134f28-33a5-47d8-aeb1-16f2ef620900
+Susan,Harris,F,3156 Birch Blvd,,54567,1962-11-20,256-72-9036,269-336-5808,harris_susan@gmail.com,3d85117d-3714-4625-96a3-c3a005ba1a7d
+Tomas,Martin,M,9987 Pine Ln,Apt 17,91968,1956-12-19,,499-372-8094,tomas.martin@gmail.com,c3b26951-24de-4e0f-b16a-61f5bf121288
+Margaret,Thompson,F,6411 Oak Dr,,46961,1995-11-09,,650-731-8063,margaretmoon@hotmail.com,1d7b4bbc-3c06-4742-89f5-47646191a555
+Charles,Wood,M,6507 Birch Blvd,Apt 12,18571,1997-02-15,,942-933-9011,charlesgamer@university.edu,dd6d56ef-4912-40cb-9d28-3f7d128bb462
+Lisa,Lewis,F,5200 Birch Blvd,Apt 7,95595,1964-07-10,,686-907-2287,lisasun@icloud.com,40d56e43-5a6b-4c3b-9ec3-a4baf93d622e
+Christopher,Scott,M,,Apt 9,37429,1986-03-22,,329-905-4958,,1dad10fb-d5d2-4513-bfde-01a2d3489397
+Nancy,Green,F,9293 Pine Ln,,24473,1996-03-14,,289-991-8812,green_nancy@yahoo.com,c8fae643-2bdd-4e41-a1a8-c2c88dd585be
+Daniel,Bakeer,M,4867 Oak Dr,Apt 2,78486,1977-12-20,,755-589-8801,,038755f1-0be3-4ae6-a8d7-a46d2cf36f29
+Karen,Adams,F,1366 Birch Blvd,,97290,1955-05-16,,435-692-1423,karen.adams@hotmail.com,adb8f00b-1cae-4959-878d-9560d7240d47
+Matthew,Nelson,M,820 Oak Dr,,98125,1975-04-15,,775-563-1578,gamer908@gmail.com,2d864c27-523f-4e04-aa63-1ff212fda7b7
+Betty,Carter,F,9808 Elm St,,18211,1954-11-19,,200-778-8748,carter_betty@mail.com,0e19d8e3-5a12-4a1b-8b61-da36137947a0
+Anthony,Mitchell,M,5057 Oak Dr,,94689,1960-04-09,909-92-6325,641-451-9922,anthonymoon@icloud.com,73d69ca7-2df8-4b37-871e-177d0e711364
+Sandra,Perez,F,5510 Birch Blvd,Apt 19,41134,1955-11-15,,232-279-6444,perez_sandra@icloud.com,6d4ceb22-9d13-4513-9886-efce66623728
+Mark,Roberts,M,8096 Maple St,,16842,1998-01-10,,756-651-7507,mroberts1998@yahoo.com,297f45c7-f820-4533-81e7-0687393f7e99
+Ashley,Turner,F,9812 Pine Ln,Apt 5,28278,1977-11-20,,558-332-6923,turner_ashley@icloud.com,f9bfbfa1-6ad5-49b7-b98c-6721962afdc6
+Donald,Phillips,M,2756 Elm St,Apt 18,29646,1990-12-23,116-83-6361,377-531-4194,dphillips1990@yahoo.com,74fc7923-e1a2-4753-9417-4b5bcba7694a
+Kimberly,Campbell,F,1117 Pine Ln,,99538,1979-10-18,,214-885-3271,blue377@yahoo.com,b7e7b31f-5694-4b65-bdcd-86a721488a7d
+Steven,Parker,M,3408 Birch Blvd,,89140,1960-04-16,951-99-5501,592-911-8147,sun633@hotmail.com,b98dac07-f0ff-464d-ba62-c0a816d48b44
+Emily,Evans,F,6258 Oak Dr,,81818,1969-02-21,,221-955-6213,eevans1969@mail.com,847131fe-70d3-4707-9519-b6495dd2d433
+Paul,Edwards,M,,,32821,1999-08-13,,679-458-3760,paul.edwards@university.edu,b9a4146e-71c7-4411-bea7-3b515121634c
+Donna,Collins,F,7437 Cedar Ct,,73896,1956-08-28,674-93-7830,919-576-9838,donnamoon@yahoo.com,d3d5aeea-ae65-4b5c-a6e9-5e69733f7671
+Andrew,Stewart,M,7158 Oak Dr,Apt 4,16677,1951-03-11,,988-447-6867,andrew.stewart@icloud.com,61947b91-c1ca-4688-9fbc-28296ba03dcb
+Michelle,Sanchez,F,9185 Cedar Ct,,96935,1995-03-22,542-52-6656,941-344-8135,michelleblue@gmail.com,66f874ac-6b83-4d9b-8e85-d6ea7ed2b49a
+Joshua,Morris,M,5514 Maple St,,27496,1994-09-26,137-21-2801,912-629-6702,joshua.morris@gmail.com,f721d4d5-151c-4c8d-a061-ba3ce62ab61f
+Carol,Rogers,F,4898 Birch Blvd,,74975,1979-03-07,,954-707-5635,carol.rogers@university.edu,332abf05-f94c-4530-abd5-a13fcecf87b8
+Kenneth,Reed,M,718 Elm St,,97755,1997-05-15,,990-732-6715,kenneth.reed@company.org,008a225b-facd-4272-bbe6-6ea4cb80dd0c
+Amanda,Cook,F,4907 Maple St,Apt 17,95087,1958-09-03,,209-273-9255,gamer185@icloud.com,1ff85f94-cc41-4e1b-92d9-b212992835db
+Kevin,Morgan,M,6265 Birch Blvd,Apt 16,78704,1970-11-07,868-82-3998,444-627-6888,happy192@hotmail.com,e7c8cd8c-f4cd-48a5-8cd0-05e2a6082d8b
+Melissa,Bell,F,7327 Maple St,Apt 1,13786,1992-11-15,,400-598-4736,,39666203-55ea-4336-8a1a-3accb705e506
+Brian,Murphy,M,6792 Pine Ln,Apt 20,36007,1955-05-15,,552-638-3923,brian.murphy@outlook.com,5268c608-5aca-49e2-bfad-e6161045e139
+Deborah,Bailey,F,1062 Cedar Ct,,68224,1989-09-22,,549-963-6494,bailey_deborah@mail.com,625bbc5b-efe0-44cc-8ded-aa0cbf9e3542
+George,Rivera,M,979 Elm St,,83762,1972-07-07,,328-739-7744,george.rivera@hotmail.com,24a3d356-1e69-492d-88ae-8ea50c88d978
+Stephanie,Cooper,F,5227 Oak Dr,Apt 6,95446,1957-02-18,,237-612-6906,,9bc2ff43-f371-46e3-bcbb-7cde620091a4
+Edward,Richardson,M,2882 Oak Dr,,95540,1980-06-22,,478-321-6377,edwardtech@hotmail.com,94b62ca9-23cb-4660-83ad-e9fc35a72707
+Rebecca,Cox,F,4118 Pine Ln,,13668,1978-12-05,,215-971-3284,rebecca.cox@company.org,ed5fcc57-95fd-4864-b173-e09eb754780e
+Ronald,Howard,M,902 Oak Dr,,64104,1986-03-20,,904-645-7236,howard_ronald@gmail.com,07c89c8d-5b23-4586-a4cf-4a95ea51a32d
+Laura,Ward,F,4050 Pine Ln,,34278,1994-07-20,,284-284-8228,,f202e710-8fe5-4d73-aade-d91ef2f9cfbe
+Timothy,Torres,M,2006 Oak Dr,,95864,1962-11-10,198-77-3575,733-954-7405,timothy.torres@company.org,da24fca1-ba20-4939-86dd-86671e1c4fc4
+Sharon,Peterson,F,,,91062,1996-09-24,,983-252-6874,sharon.peterson@mail.com,86f21188-980c-4978-9ba6-3b8de96a9a01
+Jason,Gray,M,600 Pine Ln,Apt 4,25881,1963-02-16,,443-441-2645,jasonsun@outlook.com,0c394267-3598-4a35-b3d6-ab0426b5f314
+Cyntia,Ramirez,F,9914 Cedar Ct,Apt 18,77197,1955-09-14,,707-412-7898,sports986@outlook.com,f9c1ba38-b159-4c6c-b1f9-7cb77a67fe73
+Jeffrey,James,M,4102 Birch Blvd,Apt 5,47010,1996-03-12,,484-233-6831,james_jeffrey@hotmail.com,54370039-c8c6-410e-822a-d58d730f1cb0
+Kathleen,Watsn,F,8173 Birch Blvd,,34216,1992-09-22,,675-784-7071,kathleenhappy@yahoo.com,8e471d70-90d3-49ec-b008-724c8a151bfe
+Ryan,Brooks,M,4376 Oak Dr,Apt 4,77974,1969-08-06,,973-751-1945,gamer81@gmail.com,21325f3e-7223-4d52-9518-944af273dcc7
+Helen,Kelly,F,3199 Elm St,,53913,1963-08-08,,486-301-6035,helen.kelly@gmail.com,1de3f8df-3441-4e48-95c7-673340af616f
+Jacob,Sanders,M,,Apt 15,93416,1962-05-05,,899-443-2428,sanders_jacob@icloud.com,526ba938-c3df-498f-a4c5-9e3fab93d1f1
+Amy,Price,F,3164 Walnut Ave,,52461,1988-06-16,,457-914-4412,amy.price@company.org,10412437-b5f7-4a3c-af96-046c70dcd453
+Gary,Bennett,M,7147 Birch Blvd,,94557,1953-10-06,,218-614-7005,garycoder@company.org,884bfd9f-969c-43e9-a87a-04e6b8551516
+Shirley,Wood,F,,,19513,1978-02-13,,883-301-8579,wood_shirley@hotmail.com,f38697db-1acc-4842-937b-d361a4de6e86
+Nicholas,Barnes,M,3702 Maple St,,46551,1951-06-21,,876-494-2324,nbarnes1951@outlook.com,771e5bd1-8264-4a4b-8d18-2fb2289220ef
+Angela,Ross,F,,Apt 3,59911,1993-04-28,,818-724-7894,ross_angela@hotmail.com,9ca953f9-0c05-44e2-9d0d-98dd5c488ffb
+Eric,Henderson,M,,Apt 7,24692,1977-10-22,,382-432-8053,star909@hotmail.com,18c31d67-cbc4-459c-b1cf-77d7ff23e8f8
+Anna,Coleman,F,1459 Oak Dr,Apt 5,99602,1982-11-09,,276-640-6442,annagamer@university.edu,e531b9e1-7523-4d3d-8d70-347780257886
+Stephen,Jenkins,M,5058 Maple St,Apt 2,14468,1973-10-06,,418-402-2611,stephen.jenkins@company.org,ce9aa777-b907-4945-b867-0f3500446922
+Brenda,Perry,F,8730 Elm St,,31379,1967-08-01,,973-415-4705,perry_brenda@university.edu,fa3cd7b9-8163-49dc-a1b0-56ec5766413b
+Jonathan,Powell,M,5632 Walnut Ave,Apt 3,72602,1961-07-11,,643-505-9798,jonathanrunner@yahoo.com,9c7709df-7ea1-4d67-a46f-4b5956955ec5
+Pamela,Long,F,9653 Walnut Ave,,79904,1971-07-02,,943-805-8722,pamela.long@gmail.com,33000336-27b2-4c6e-92c4-99875b376316
+Larry,Patterson,M,9598 Cedar Ct,,60820,1985-03-11,,778-988-8437,lpatterson1985@company.org,dd13e959-95c5-4659-aea2-3407753c81cd
+Emma,Hughes,F,1451 Walnut Ave,,13773,1967-08-24,,959-378-8019,emmablue@company.org,231294f3-ef16-4da2-8f67-53f26a13bf65
+Justin,Flores,M,9714 Oak Dr,,99363,1960-07-21,,627-871-6175,flores_justin@icloud.com,667372ef-1030-4af3-a8cf-fe5994b7113e
+Nicole,Washington,F,1041 Elm St,Apt 11,98908,1960-10-05,,646-834-3997,,bd40d006-b5f6-4999-96f4-882af6cd352f
+Scott,Butler,M,5336 Cedar Ct,,12105,1961-08-25,,992-606-7607,butler_scott@gmail.com,f00bf6cb-556f-49d5-96a2-534c524c21ef
