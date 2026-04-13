@@ -110,7 +110,7 @@ pairs = (
 print(f"Candidate pairs after blocking: {len(pairs):,}")
 
 
-#Now creating the scores: 
+#Now creating the scores and weighting each score properly as well so that the accuracy can be higher: 
 
 #Weights creation: 
 WEIGHTS = {
@@ -124,42 +124,46 @@ WEIGHTS = {
     "sex":    0.02, #sex weight
     "street": 0.02, #street weight
 }
-#weights sum to 1.0
+#weights sum to 1.0 which is good!
  
+
+#first off - simple yes or no function to make sure that if dob/ssn are same that its a match and you can return the match
 def score_exact(a: str, b: str) -> float:
     if not a or not b:
         return 0.0
     return 1.0 if a == b else 0.0
  
+#function for fuzzy matching scoring + provides a value to utilize as well:
 def score_fuzzy(a: str, b: str) -> float:
     if not a or not b:
         return 0.0
     return fuzz.token_sort_ratio(a, b) / 100.0
  
+#now a function that computes the scores utilizing the weights provided:
 def compute_score(row) -> float:
     s = 0.0
-    s += WEIGHTS["ssn"]    * score_exact( row["n_ssn_1"],    row["n_ssn_2"])
-    s += WEIGHTS["dob"]    * score_exact( row["n_dob_1"],    row["n_dob_2"])
-    s += WEIGHTS["last"]   * score_fuzzy( row["n_last_1"],   row["n_last_2"])
-    s += WEIGHTS["first"]  * score_fuzzy( row["n_first_1"],  row["n_first_2"])
-    s += WEIGHTS["email"]  * score_exact( row["n_email_1"],  row["n_email_2"])
-    s += WEIGHTS["phone"]  * score_exact( row["n_phone_1"],  row["n_phone_2"])
-    s += WEIGHTS["zip"]    * score_exact( row["n_zip_1"],    row["n_zip_2"])
-    s += WEIGHTS["sex"]    * score_exact( row["n_sex_1"],    row["n_sex_2"])
-    s += WEIGHTS["street"] * score_fuzzy( row["n_street_1"], row["n_street_2"])
+    s += WEIGHTS["ssn"]    * score_exact( row["n_ssn_1"],    row["n_ssn_2"]) #SSN
+    s += WEIGHTS["dob"]    * score_exact( row["n_dob_1"],    row["n_dob_2"]) #DOB 
+    s += WEIGHTS["last"]   * score_fuzzy( row["n_last_1"],   row["n_last_2"]) #Last name
+    s += WEIGHTS["first"]  * score_fuzzy( row["n_first_1"],  row["n_first_2"]) #first name
+    s += WEIGHTS["email"]  * score_exact( row["n_email_1"],  row["n_email_2"]) #email 
+    s += WEIGHTS["phone"]  * score_exact( row["n_phone_1"],  row["n_phone_2"])#phone number
+    s += WEIGHTS["zip"]    * score_exact( row["n_zip_1"],    row["n_zip_2"]) #zipcode
+    s += WEIGHTS["sex"]    * score_exact( row["n_sex_1"],    row["n_sex_2"]) #sex
+    s += WEIGHTS["street"] * score_fuzzy( row["n_street_1"], row["n_street_2"]) #street name
     return s
  
 print("Scoring candidate pairs (this may take a moment)...")
-pairs["score"] = pairs.apply(compute_score, axis=1)
+pairs["score"] = pairs.apply(compute_score, axis=1) #scores
 
-#now deciding threshold for tolerance for picsk: 
+#now deciding threshold for tolerance for picks/accuracy: 
 
-THRESHOLD = 0.65 #0.65 threshold
+THRESHOLD = 0.65 #0.65 threshold chosen
  
-# Keep only pairs above threshold
+#Keeping only pairs that are above the threshold
 above = pairs[pairs["score"] >= THRESHOLD].copy()
  
-# For each df1 UUID keep only the highest-scoring df2 match
+#For each dataset 1 UUID keeping only the highest-scoring dataset 2 match
 best_matches = (
     above
     .sort_values("score", ascending=False)
@@ -171,25 +175,31 @@ best_matches = (
 print(f"\nMatched pairs (score ≥ {THRESHOLD}): {len(best_matches):,}")
  
 
- #Now calculating accuracy, precision, and recall: 
+ #Now last step: calculating accuracy, precision, and recall + true positive/false positive rate: 
 
- # True positive  = predicted df2 UUID matches the actual df2 UUID
+#best matches:
 best_matches["correct"] = best_matches["uuid_df1"] == best_matches["uuid_pred_df2"]
  
+
+#true and false positive values:
 TP = int(best_matches["correct"].sum())
 FP = int((~best_matches["correct"]).sum())
  
-# False negatives = df1 UUIDs that exist in df2 but were NOT matched
+#False negative rate:
 all_df1_uuids = set(data_1["UUID"])
 all_df2_uuids = set(data_2["UUID"])
 true_positives_possible = all_df1_uuids & all_df2_uuids   # records that SHOULD be matched
 matched_df1_uuids = set(best_matches["uuid_df1"])
 FN = len(true_positives_possible - matched_df1_uuids)
  
-precision = TP / (TP + FP) if (TP + FP) > 0 else 0.0
-recall    = TP / (TP + FN) if (TP + FN) > 0 else 0.0
-accuracy  = TP / len(true_positives_possible) if len(true_positives_possible) > 0 else 0.0
+
+#precison, accuracy, recall
+precision = TP / (TP + FP) if (TP + FP) > 0 else 0.0 #precision
+recall    = TP / (TP + FN) if (TP + FN) > 0 else 0.0 #recall
+accuracy  = TP / len(true_positives_possible) if len(true_positives_possible) > 0 else 0.0 #accuracy
  
+
+#printing all our results:
 print("\n─────────────────────────────────────────")
 print("  EVALUATION RESULTS")
 print("─────────────────────────────────────────")
