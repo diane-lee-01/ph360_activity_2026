@@ -1,0 +1,193 @@
+---
+title: "Data_Linkage"
+output: html_document
+date: "2026-04-13"
+---
+
+```{r}
+# Loading in the 2 datasets
+library(tidyverse)
+df1 <- read_csv("sampledata1.csv")
+df2 <- read_csv("sampledata2.csv")
+```
+
+```{r}
+library(janitor)     # clean_names()
+library(stringr)     # string processing
+
+# Converting all column names to lowercase + snake_case (underscores)
+# Example: "FirstName" → "first_name"
+df1 <- df1 %>% clean_names()
+df2 <- df2 %>% clean_names()
+
+# Rename df2 columns so BOTH datasets use identical names
+# This is required for joining later
+df2 <- df2 %>%
+  rename(
+    first_name = first_name,     # already matches after clean_names()
+    last_name  = last_name,
+    sex        = sex,
+    zip_code   = zip,            # zip → zip_code
+    birth_date = dob,            # dob → birth_date
+    ssn        = ssn,
+    phone      = phone_number,    # phonenumber → phone
+    email      = email_address    # emailaddress → email
+  )
+```
+
+```{r}
+# Creating a cleaning function
+clean_text <- function(x) {
+  x %>%
+    as.character() %>%          # force everything to text (avoids type issues)
+    str_to_lower() %>%          # "John" → "john"
+    str_squish() %>%            # remove extra spaces (" john  " → "john")
+    str_replace_all("[^a-z0-9]", "")  
+    # remove ALL non-alphanumeric characters
+    # "o'brien" → "obrien"
+    # "john-smith" → "johnsmith"
+}
+```
+
+```{r}
+df1_clean <- df1 %>%
+  mutate(
+    # Standardize first name
+    first_name_clean = clean_text(first_name),
+
+    # Standardize last name
+    last_name_clean  = clean_text(last_name),
+
+    # Standardize sex (e.g., "M", "Male", " male ")
+    sex_clean        = clean_text(sex),
+
+    # Extract ONLY 5-digit ZIP code
+    # Handles cases like "60601-1234" → "60601"
+    zip_clean = str_extract(as.character(zip_code), "\\d{5}"),
+
+    # Convert date to character so formats match exactly across datasets
+    dob_clean = as.character(birth_date)
+  )
+```
+
+```{r}
+df2_clean <- df2 %>%
+  mutate(
+    first_name_clean = clean_text(first_name),
+    last_name_clean  = clean_text(last_name),
+    sex_clean        = clean_text(sex),
+    zip_clean        = str_extract(as.character(zip_code), "\\d{5}"),
+    dob_clean        = as.character(birth_date)
+  )
+```
+
+```{r}
+# Check column names are aligned
+names(df1_clean)
+names(df2_clean)
+
+# Inspect cleaned variables
+head(df1_clean %>% 
+       select(first_name_clean, last_name_clean, sex_clean, zip_clean, dob_clean))
+
+head(df2_clean %>% 
+       select(first_name_clean, last_name_clean, sex_clean, zip_clean, dob_clean))
+```
+
+```{r}
+# Performing an inner join:
+# keeps only records where ALL five cleaned matching variables
+# are exactly the same in both datasets
+matches <- inner_join(
+  df1_clean,
+  df2_clean,
+  by = c(
+    "first_name_clean",
+    "last_name_clean",
+    "dob_clean",
+    "sex_clean",
+    "zip_clean"
+  ),
+  suffix = c("_1", "_2")
+)
+
+# Viewing how many matched pairs were found
+nrow(matches)
+
+# Looking at the first few matched records
+head(matches)
+```
+
+```{r}
+# crossing() requires unique column names, so adding suffixes to the column names
+df1_eval <- df1_clean %>%
+  rename_with(~ paste0(., "_1"))
+df2_eval <- df2_clean %>%
+  rename_with(~ paste0(., "_2"))
+
+# Creating ALL possible pairs between dataset 1 and dataset 2.
+# crossing() creates the Cartesian product:
+# every row in df1_clean paired with every row in df2_clean.
+all_pairs <- crossing(df1_eval, df2_eval)
+
+# For each pair, we are defining:
+# 1. true_match: the UUIDs are actually the same
+# 2. predicted_match: my exact-match rule says they match
+all_pairs <- all_pairs %>%
+  mutate(
+    true_match = uuid_1 == uuid_2,
+
+    predicted_match =
+      first_name_clean_1 == first_name_clean_2 &
+      last_name_clean_1  == last_name_clean_2 &
+      dob_clean_1        == dob_clean_2 &
+      sex_clean_1        == sex_clean_2 &
+      zip_clean_1        == zip_clean_2
+  )
+```
+
+```{r}
+# Counting the four cells of the confusion matrix
+
+tp <- sum(all_pairs$predicted_match & all_pairs$true_match)
+# True positive:
+# my algorithm said "match" and it really was a match
+
+fp <- sum(all_pairs$predicted_match & !all_pairs$true_match)
+# False positive:
+# my algorithm said "match" but UUID says it was NOT a true match
+
+fn <- sum(!all_pairs$predicted_match & all_pairs$true_match)
+# False negative:
+# my algorithm missed a real match
+
+tn <- sum(!all_pairs$predicted_match & !all_pairs$true_match)
+# True negative:
+# my algorithm correctly said "not a match"
+
+tp
+fp
+fn
+tn
+```
+```{r}
+# Calculating the assignment performance metrics
+
+accuracy <- (tp + tn) / (tp + fp + fn + tn)
+# Proportion of all candidate pairs classified correctly
+
+precision <- tp / (tp + fp)
+# Among predicted matches, how many were actually correct?
+
+recall <- tp / (tp + fn)
+# Among all true matches, how many did your algorithm recover?
+
+accuracy
+precision
+recall
+```
+
+```{r}
+
+```
+
