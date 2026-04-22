@@ -10,6 +10,15 @@ from itertools import product
 data_1 = pd.read_csv("data/sampledata1.csv", dtype=str).fillna("") #dataset 1
 data_2 = pd.read_csv("data/sampledata2.csv", dtype=str).fillna("") #dataset 2
 
+#creating uuid_1 and uuid_2 for later:
+uuid_1 = data_1["UUID"].copy()
+uuid_2 = data_2["UUID"].copy()
+
+#adding in IDX lines: 
+data_1["_idx1"] = data_1.index.astype(str) #_idx1
+data_2["_idx2"] = data_2.index.astype(str) #idx2
+
+
 #Creating normalization functions for each column to ensure that the values match up properly: 
 
 #General normalize function
@@ -96,11 +105,11 @@ print(f"Shared blocks:       {len(common_blocks)}")
 #code joins the dataset together on the block key value to create candidates for comparison
 pairs = (
     data_1[data_1["block_key"].isin(common_blocks)][
-        ["UUID","n_first","n_last","n_sex","n_zip","n_dob","n_ssn","n_phone","n_email","n_street"]
+        ["_idx1","UUID","n_first","n_last","n_sex","n_zip","n_dob","n_ssn","n_phone","n_email","n_street"]
     ].assign(key=data_1["block_key"])
     .merge(
         data_2[data_2["block_key"].isin(common_blocks)][
-            ["UUID","n_first","n_last","n_sex","n_zip","n_dob","n_ssn","n_phone","n_email","n_street"]
+            ["_idx2","UUID","n_first","n_last","n_sex","n_zip","n_dob","n_ssn","n_phone","n_email","n_street"]
         ].assign(key=data_2["block_key"]),
         on="key",
         suffixes=("_1","_2")
@@ -158,55 +167,64 @@ pairs["score"] = pairs.apply(compute_score, axis=1) #scores
 
 #now deciding threshold for tolerance for picks/accuracy: 
 
-THRESHOLD = 0.65 #0.65 threshold chosen
+THRESHOLD = 0.65 #threshold to use
  
-#Keeping only pairs that are above the threshold
-above = pairs[pairs["score"] >= THRESHOLD].copy()
- 
-#For each dataset 1 UUID keeping only the highest-scoring dataset 2 match
-best_matches = (
-    above
+above = (
+    pairs[pairs["score"] >= THRESHOLD]
     .sort_values("score", ascending=False)
-    .drop_duplicates(subset="UUID_1", keep="first")
-    [["UUID_1", "UUID_2", "score"]]
-    .rename(columns={"UUID_1": "uuid_df1", "UUID_2": "uuid_pred_df2"})
+    .copy()
 )
  
-print(f"\nMatched pairs (score ≥ {THRESHOLD}): {len(best_matches):,}")
+claimed_1 = set()   #row indices matched in dataset 1
+claimed_2 = set()   #row indices matched in dataset 2
+accepted_rows = []
  
-
- #Now last step: calculating accuracy, precision, and recall + true positive/false positive rate: 
-
-#best matches:
-best_matches["correct"] = best_matches["uuid_df1"] == best_matches["uuid_pred_df2"]
+for _, row in above.iterrows():
+    i1 = row["_idx1"]
+    i2 = row["_idx2"]
+    if i1 not in claimed_1 and i2 not in claimed_2:
+        claimed_1.add(i1)
+        claimed_2.add(i2)
+        accepted_rows.append({"_idx1": i1, "_idx2": i2, "score": row["score"]})
  
+best_matches = pd.DataFrame(accepted_rows, columns=["_idx1", "_idx2", "score"])
+print(f"\nMatched pairs (score ≥ {THRESHOLD}, one-to-one): {len(best_matches):,}")
 
-#true and false positive values:
-TP = int(best_matches["correct"].sum())
-FP = int((~best_matches["correct"]).sum())
+#Mapping the accepted row-index pairs back to UUID to check correctness:
+idx_to_uuid1 = uuid_1.to_dict() #mapping
+idx_to_uuid2 = uuid_2.to_dict() #mapping
  
-#False negative rate:
-all_df1_uuids = set(data_1["UUID"])
-all_df2_uuids = set(data_2["UUID"])
-true_positives_possible = all_df1_uuids & all_df2_uuids   # records that SHOULD be matched
-matched_df1_uuids = set(best_matches["uuid_df1"])
-FN = len(true_positives_possible - matched_df1_uuids)
+#finding the best matches:
+best_matches["uuid_df1"]      = best_matches["_idx1"].astype(int).map(idx_to_uuid1)
+best_matches["uuid_pred_df2"] = best_matches["_idx2"].astype(int).map(idx_to_uuid2)
  
-
-#precison, accuracy, recall
+#Note: A prediction is correct when the two UUIDs are the same
+best_matches["correct"] = best_matches["uuid_df1"] == best_matches["uuid_pred_df2"] #correct matches
+ 
+TP = int(best_matches["correct"].sum()) #true positives
+FP = int((~best_matches["correct"]).sum()) #false positives
+ 
+#False negatives:
+all_uuid1 = set(uuid_1)
+all_uuid2 = set(uuid_2)
+true_matchable = all_uuid1 & all_uuid2         
+matched_uuid1  = set(best_matches["uuid_df1"])
+FN = len(true_matchable - matched_uuid1)     #false negatives 
+ 
+#now precision, recall and accuracy calculations:
 precision = TP / (TP + FP) if (TP + FP) > 0 else 0.0 #precision
 recall    = TP / (TP + FN) if (TP + FN) > 0 else 0.0 #recall
-accuracy  = TP / len(true_positives_possible) if len(true_positives_possible) > 0 else 0.0 #accuracy
+accuracy  = TP / len(true_matchable) if len(true_matchable) > 0 else 0.0 #accuracy
  
-
-#printing all our results:
+ #printing: 
 print("\n─────────────────────────────────────────")
-print("  EVALUATION RESULTS")
+print("  EVALUATION RESULTS") #saying its results!
 print("─────────────────────────────────────────")
-print(f"  True Positives  (TP): {TP}")
-print(f"  False Positives (FP): {FP}")
-print(f"  False Negatives (FN): {FN}")
-print(f"  Accuracy  : {accuracy:.4f}  ({accuracy*100:.2f}%)")
-print(f"  Precision : {precision:.4f}  ({precision*100:.2f}%)")
-print(f"  Recall    : {recall:.4f}  ({recall*100:.2f}%)")
+print(f"  True Positives  (TP): {TP}") #true positives
+print(f"  False Positives (FP): {FP}") #false positives 
+print(f"  False Negatives (FN): {FN}") #false negatives
+print(f"  Accuracy  : {accuracy:.4f}  ({accuracy*100:.2f}%)") #accuracy
+print(f"  Precision : {precision:.4f}  ({precision*100:.2f}%)") #precision
+print(f"  Recall    : {recall:.4f}  ({recall*100:.2f}%)") #recall
 print("─────────────────────────────────────────")
+ 
