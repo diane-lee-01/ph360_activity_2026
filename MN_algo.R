@@ -9,6 +9,13 @@ View(dataset2)
 
 # Pre-processing steps ----
 
+# - Count missing values in each column to determine weed out variables for matching algo
+missing_counts_1 <- colSums(is.na(dataset1))
+missing_counts_2 <- colSums(is.na(dataset2))
+missing_counts_1
+missing_counts_2
+
+
 # - Remove spaces before and after names
 names_clean <- function(df, first, last) {
   df[[first]] <- trimws(as.character(df[[first]]))
@@ -28,7 +35,7 @@ date_clean <- function(df, birthcol) {
   df[[birthcol]] <- format(as.Date(df[[birthcol]], format = "%Y-%m-%d"), "%Y-%m-%d")
 }
 
-# - Check the fill rate of columns of interest
+# - Check the fill rate of columns of interest (I chose these variables instead of SSN because I noticed this variable was not filled out for everyone in dataset2, so may be inconsistent between files)
 fill_rate <- function(df, col) {
   x <- df[[col]]
   mean(!is.na(x) & x != "") * 100
