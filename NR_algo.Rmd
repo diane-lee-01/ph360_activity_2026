@@ -95,6 +95,11 @@ head(df2_clean %>%
 ```
 
 ```{r}
+# Note:
+# SSN, phone number, and email were cleaned but intentionally excluded
+# from the deterministic linkage because I wanted to evaluate linkage
+# performance using only demographic variables.
+
 # Performing an inner join:
 # keeps only records where ALL five cleaned matching variables
 # are exactly the same in both datasets
@@ -188,6 +193,11 @@ recall
 ```
 
 ```{r}
-
+# Limitation:
+# Exact deterministic matching is sensitive to data inconsistencies.
+# Probabilistic or fuzzy matching approaches
+# may have improved recall by tolerating minor
+# differences between records, but I still think the deterministic
+# matching performed well based on the metrics.
 ```
 
