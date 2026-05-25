@@ -1,10 +1,8 @@
 $ cat J_algo.R
-install.packages("fastLink")
-install.packages("dplyr")
-install.packages("stringr")
 library(dplyr)
 library(stringr)
 library(fastLink)
+library(lubridate)
 # Set and Load Data
 setwd("C:/Users/exf3638/Desktop/ph360_activity_2026")
 df1 <- read.csv("data/sampledata1.csv", stringsAsFactors = FALSE)
@@ -17,7 +15,7 @@ clean_df1 <- df1 %>%
     first_name  = str_to_lower(str_trim(first_name)),
     last_name   = str_to_lower(str_trim(last_name)),
     sex         = str_to_upper(str_trim(sex)),
-    birth_date  = str_trim(birth_date),
+    birth_date  = mdy(str_trim(birth_date)),
     phone       = str_remove_all(phone, "[^0-9]"),
     zip_code    = str_trim(as.character(zip_code)),
     email       = str_to_lower(str_trim(email))
@@ -28,7 +26,7 @@ clean_df2 <- df2 %>%
     first_name  = str_to_lower(str_trim(FirstName)),
     last_name   = str_to_lower(str_trim(LastName)),
     sex         = str_to_upper(str_trim(Sex)),
-    birth_date  = str_trim(DOB),
+    birth_date  = mdy(str_trim(DOB)),
     phone       = str_remove_all(PhoneNumber, "[^0-9]"),
     zip_code    = str_trim(as.character(Zip)),
     email       = str_to_lower(str_trim(EmailAddress))
@@ -39,10 +37,6 @@ clean_df1 <- clean_df1 %>%
     zip_code = as.numeric(zip_code)
   )
 clean_df2 <- clean_df2 %>%
-  mutate(
-    phone    = as.numeric(phone),
-    zip_code = as.numeric(zip_code)
-  )
 #Run fastlink to match by names, emails, phone, zip, and DOB
 ja_out <- fastLink(
   dfA              = clean_df1,
